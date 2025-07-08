@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+  Заказы
+{% endblock %}
+{% block content %}
+<div style="display: inline-block">
+    {% for ord in object_list %}
+    <div style="border: solid black; padding: 15px; display: inline-block">
+        {{ ord.profile }}
+        <ul>
+        {% for prod in ord.products.all %}
+            <li>{{ prod }}</li>
+        {% endfor %}
+        </ul>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

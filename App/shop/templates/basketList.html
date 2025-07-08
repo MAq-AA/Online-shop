@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load price %}
+{% block title %}
+Корзина
+{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/basketstyle.css'%}" type="text/css">
+<div class="basket-list">
+    {% if product %}
+    {% for prod in product %}
+        <div class="product">
+            <div style="grid-row: span 2;"><img class="img" src="{{ prod.img.url }}" width="200" height="200"></div>
+            <div style="font-size: 36;">{{ prod.title }}</div>
+            <div style="grid-row: span 2; font-size: 28; padding: 80px 0 0 50px"><p>{{ prod.price | replacer | safe  }}</p></div>
+            <div style="grid-row: span 2; padding: 55px 0 0 0px"><img src="{{ prod.provider.img.url }}" width="220" height="100"></div>
+            <div>
+                <form  class="form" name='{{ prod.slug }}' method="post">
+                    {% csrf_token %}
+                    <input type="number" min="1" max="100"/>
+                    <button class="trash-btn" name="delete" value="{{ prod.id }}"><img src="{% static 'images/Trash.jpg' %}" height="40"></button>
+                </form>
+            </div>
+            <div>{{ prod.shortdescription }}</div>
+        </div>
+    {% endfor %}
+    <form method="post" style="margin-top: 20px">
+        {% csrf_token %}
+        <button class="buy" name="buy" type="submit">Купить</button>
+    </form>
+    {% else %}
+    <div style="padding-top: 40vh; padding-left: 450px;">
+        {% if message %}
+            <h1 style="color: green;">{{ message }}</h1>
+        {% else %}
+            <h1>Вы еще ничего не добавили в корзину</h1>
+        {% endif %}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

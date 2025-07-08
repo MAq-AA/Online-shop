@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/Authstyle.css'%}" type="text/css">
+<div class="register">
+    <div style="padding: 25px 0 0 90px; font-size: 48;">
+        <p style="margin: 0;">Зарегистрируйтесь</p>
+    </div>
+    <form method="POST">
+    {% csrf_token %}
+        {{ form.username.errors }}
+        <p>{{ form.username }}</p>
+        {{ form.email.errors }}
+        <p>{{ form.email }}</p>
+        {{ form.password1.errors }}
+        <p>{{ form.password1 }}</p>
+        {{ form.password2.errors }}
+        <p>{{ form.password2 }}</p>
+        <button class="submit" type="submit">зарегистрироваться</button>
+    </form>
+    <div style="padding-left: 200px; padding-top: 15px;">
+            <small>У вас уже есть аккаунт?<a href="{% url 'login' %}"> Войти</a></small>
+    </div>
+</div>
+{% endblock %}
+{% block footer %}
+{% endblock %}

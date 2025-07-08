@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load price %}
+{% block title %}
+{{ product }}
+{% endblock %}
+{% block content %}
+<svg width="0" height="0" xmlns="http://www.w3.org/2000/svg">
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="star">
+        <path d="M31.547 12a.848.848 0 00-.677-.577l-9.427-1.376-4.224-8.532a.847.847 0 00-1.516 0l-4.218 8.534-9.427 1.355a.847.847 0 00-.467 1.467l6.823 6.664-1.612 9.375a.847.847 0 001.23.893l8.428-4.434 8.432 4.432a.847.847 0 001.229-.894l-1.615-9.373 6.822-6.665a.845.845 0 00.214-.869z" />
+    </symbol>
+</svg>
+<link rel="stylesheet" href="{% static 'css/Productstyle.css'%}" type="text/css">
+<div class="parent228">
+    <div class="productDetail">
+        <div>
+            <img src="{{ product.img.url }}" width="500px" height="500px" style="border: solid #DDD;">
+        </div>
+        <div class="data">
+            <div><p class="Bname">{{ product }}</p></div>
+            <div style="font-size: 20;">{{ product.shortdescription }}
+            {% if request.user.groups.all.1.name == 'Moders' %}
+                <a href="{% url 'delete_product' product.id %}">Удалить товар</a>
+            {% endif %}
+            </div>
+            <div class="bot">
+                <div>
+                    <p class="price">{{ product.price | replacer | safe }}</p>
+                </div>
+                <div style="">
+                    <img src="{{ product.provider.img.url }}" width="200" height="70">
+                </div>
+                <div>
+                    {% if user.is_authenticated %}
+                    <form style="margin: 0; padding: 0;" method="post">
+                        {% csrf_token %}
+                        {% autoescape off %}
+                        {% bought product.id %}
+                        {% endautoescape %}
+                    </form>
+                    {% else %}
+                    <p>Войдите в аккаунт, чтоб добавлять в корзину</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="full-description">
+        <h2>Описание</h2>
+        <p>{{ product.description }}</p>
+        <h2>О производителе</h2>
+        <p>{{ product.provider.company }}</p>
+        <p><img src="{{ product.provider.img.url }}" width="200" height="70"></p>
+        <p>{{ product.provider.phone_number }}</p>
+    </div>
+    <div class="Feedback">
+        <div style="height: 40px;"><p style="font-size: 28; height: 30px;">Оставьте отзыв</p></div>
+        {% if user.is_authenticated and permission %}
+        <div class="form-comment">
+        <form action="{% url 'product_description' animal_sort.slug subcategory.slug product.slug %}" method="post">
+            {% csrf_token %}
+            <div style="grid-column: span 4;">{{ form.text }}</div>
+            <div style="padding-left: 40px;">
+                <p class="c-rate">
+                    <input class="rd" type="radio" hidden id="star1">
+                    <input class="rd" type="radio" hidden id="star2">
+                    <input class="rd" type="radio" hidden id="star3">
+                    <input class="rd" type="radio" hidden id="star4">
+                    <input class="rd" type="radio" hidden id="star5">
+                    <label for='star1'>
+                        <svg class="c-icon" width="48" height="48">
+                        <use xlink:href="#star"></use>
+                    </svg>
+                    </label>
+                    <label for='star2'>
+                        <svg class="c-icon" width="48" height="48">
+                          <use xlink:href="#star"></use>
+                        </svg>
+                    </label>
+                    <label for='star3'>
+                        <svg class="c-icon" width="48" height="48">
+                          <use xlink:href="#star"></use>
+                        </svg>
+                    </label>
+                    <label for='star4'>
+                        <svg class="c-icon" width="48" height="48">
+                          <use xlink:href="#star"></use>
+                        </svg>
+                    </label>
+                    <label for='star5'>
+                        <svg class="c-icon" width="48" height="48">
+                          <use xlink:href="#star"></use>
+                        </svg>
+                    </label>
+                </p>
+            </div>
+            <div></div>
+            <div></div>
+            <div> <button name="Comment" type="submit" class="basket-button">Оставить комментарий</button></div>
+        </form>
+        </div>
+        {% else %}
+        <div style="height: 30px;" >
+            <p>Купите этот товар, чтоб получить возможность оставить отзыв :(</p>
+        </div>
+        {% endif %}
+        <div class="list-of-comment">
+            {% for comm in list_comments %}
+                <div class="comm">
+                    <div style="padding:10px;">
+                        {{ comm.profile }}
+                    </div>
+                    <div style="padding:10px;">{{ comm.score }}</div>
+                    <div class="text">{{ comm.text }}</div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

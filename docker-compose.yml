@@ -1,0 +1,20 @@
+services:
+  psqlDB:
+    image: maq31514/online-shop-psql
+    environment:
+      POSTGRES_DB: "PET_SHOP"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "1234"
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    volumes:
+      - ../2. Init Database:/docker-entrypoint-initdb.d
+      - psqldb-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+  PS-web:
+    image: maq31514/online-shop-web
+    command: python manage.py runserver 0.0.0.0:5000
+    ports:
+      - "5000:5000"
+volumes:
+  psqldb-data:

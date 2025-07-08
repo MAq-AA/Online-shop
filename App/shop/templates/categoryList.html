@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Категории
+{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/catalogstyle.css'%}" type="text/css">
+<div class="parent">
+    <div class="navigation" style="border: solid #DDD;">
+        <ul>
+        {% for cat in cat_and_sub %}
+            {% if not forloop.counter|divisibleby:"2" %}
+            <li><h3>{{ cat }}</h3></li>
+            {% else %}
+            <ul>
+                <li><a href="{% url 'product_list' animal_sort cat.0.slug %}" class="productA"><p>{{ cat.0 }}</p></a></li>
+                <li><a href="{% url 'product_list' animal_sort cat.1.slug %}" class="productA"><p>{{ cat.1 }}</p></a></li>
+                <li><a href="{% url 'product_list' animal_sort cat.2.slug %}" class="productA"><p>{{ cat.2 }}</p></a></li>
+            </ul>
+            {% endif %}
+        {% endfor %}
+        </ul>
+    </div>
+    <div class="list_cat">
+    {% for cat in cat_and_sub %}
+        {% if not forloop.counter|divisibleby:"2" %}
+            <div class="category" style="border: solid #DDD;">
+                {{ cat }}
+            </div>
+        {% else %}
+            <a href="{% url 'product_list' animal_sort cat.0.slug %}" class="productA">
+                <div class="product" style="border: solid #DDD;">
+                    <p class="titleP">{{ cat.0 }}</p>
+                    <img class='image' src="{{ cat.0.img.url }}" width="80%">
+                </div>
+            </a>
+            <a href="{% url 'product_list' animal_sort cat.1.slug %}" class="productA">
+                <div class="product" style="border: solid #DDD;">
+                    <p class="titleP">{{ cat.1 }}</p>
+                    <img class='image' src="{{ cat.1.img.url }}" width="80%">
+                </div>
+            </a>
+            <a href="{% url 'product_list' animal_sort cat.2.slug %}" class="productA">
+                <div class="product" style="border: solid #DDD;">
+                    <p class="titleP">{{ cat.2 }}</p>
+                    <img class='image' src="{{ cat.2.img.url }}" width="80%">
+                </div>
+            </a>
+        {% endif %}
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}

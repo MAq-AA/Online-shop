@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load price %}
+{% block title %}
+    Поиск: {{ search }}
+{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/basketstyle.css'%}" type="text/css">
+<div class="basket-list">
+    <h2>Результаты по запросу: "{{ search }}" </h2>
+        <form method="get" class="fltr">
+            <div class="order">
+                <div style="height: 40px"><p style="font-size:28; margin: 10px 0 0 0;">Сортировать по:</p></div>
+                <select style="width: 100%" name="order">
+                    <option selected>---------</option>
+                    <option value="mM">По возрастанию цены</option>
+                    <option value="Mm">По по убыванию цены</option>
+                    <option value="population">По популярности</option>
+                    <option value="stars">По рейтингу</option>
+                </select>
+            </div>
+            <div class="price">
+                <p style="grid-column: span 2;">Цена:</p>
+                <div>От: {{ filter.form.price__lt }}</div>
+                <div>До: {{ filter.form.price__gt }}</div>
+            </div>
+            <div class="provider">
+                <p style="margin: 0; font-size: 28; " >Поставщик:</p>
+                {{ filter.form.provider }}
+            </div>
+            <div></div>
+            <div style="padding-top: 40px;"><input type="submit"/> </div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </form>
+</div>
+<div class="basket-list">
+{% for res in result %}
+    <a href="{% url 'product_description' res.animal_sort.slug res.subcategory.slug res.slug %}">
+    <div class="product">
+            <div style="grid-row: span 2;"><img class="img" src="{{ res.img.url }}" width="200" height="200"></div>
+            <div style="font-size: 36;">{{ res.title }}</div>
+            <div style="grid-row: span 2; font-size: 28; padding: 80px 0 0 50px"><p>{{ res.price | replacer | safe  }}</p></div>
+            <div style="grid-row: span 2; padding: 55px 0 0 0px"><img src="{{ res.provider.img.url }}" width="220" height="100"></div>
+            <div>
+                <form  class="form1" name='{{ res.slug }}' method="post">
+                    {% csrf_token %}
+                    {% autoescape off %}
+                    {% bought res.id %}
+                    {% endautoescape %}
+                </form>
+            </div>
+            <div>{{ res.shortdescription }}</div>
+        </div>
+    </a>
+{% endfor %}
+</div>
+{% endblock %}

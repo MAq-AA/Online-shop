@@ -1,0 +1,47 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/style.css'%}" type="text/css">
+<div class="all">
+    <div>
+        <a class="a" href="{% url 'News_list' %}"><img src="{% static 'images/PetShop.png' %}" height="200"></a>
+    </div>
+    <div class="box-search">
+            <div class="input-group">
+                <form method="get" class="search-form">
+                <input name="search" type="text" id="search" placeholder="Поиск" autocomplete="off">
+                <label class="label" for="search"><button type="submit" >Найти</button></label>
+                </form>
+            </div>
+
+    </div>
+    {% if not user.is_authenticated %}
+    <div></div>
+    <div style="margin: 60 -40">
+        <a class="a" href="{% url 'register' %}"><img src="{% static 'images/Door.png' %}" height="80"></a>
+    </div>
+    {% else %}
+    <div style="margin: 60 15">
+        <a class="a" href="{% url 'basket_list' %}"><img src="{% static 'images/Basket.png' %}" height="80"></a>
+    </div>
+    <div style="margin: 65 5">
+        <a class="a" href="{% url 'profile' %}"><img src="{% static 'images/Profile.bmp' %}" height="85"></a>
+    </div>
+    {% endif %}
+    <div></div>
+    <div class="animal_sort">
+        <table>
+            <tr>
+                <td><a class="a" href="{% url 'category_list' 'cat' %}" title="Кошки"><img src="{% static 'images/Cat.png' %}" height="100"><p class="catP" >Кошки</p></a></td>
+                <td><a class="a" href="{% url 'category_list' 'dog' %}" title="Собаки"><img src="{% static 'images/Dog.png' %}" height="100"><p class="catP" >Собаки</p></a></td>
+                <td><a class="a" href="{% url 'category_list' 'rodent' %}" title="Грызуны"><img src="{% static 'images/Maus.png' %}" height="100"><p class="catP" >Грызуны</p></a></td>
+                <td><a class="a" href="{% url 'category_list' 'reptile' %}" title="Рептилии"><img src="{% static 'images/Dragon.png' %}" height="100"><p class="catP" >Рептилии</p></a></td>
+                <td><a class="a" href="{% url 'category_list' 'fish' %}" title="Рыбы"><img src="{% static 'images/Fish.png' %}" height="100"><p class="catP" >Рыбы</p></a></td>
+                <td><a class="a" href="{% url 'category_list' 'petchemist' %}" title="Ветаптека"><img src="{% static 'images/Drug.png' %}" height="100"><p class="catP" >Ветаптека</p></a></td>
+            </tr>
+        </table>
+    </div>
+    {% if user.is_authenticated %}
+        <div class="place">
+            <input type="hidden" class="subcatB">
+        </div>
+    {% endif %}
+</div>

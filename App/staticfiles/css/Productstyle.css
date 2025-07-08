@@ -1,0 +1,163 @@
+.parent228{
+    width: 80%;
+    padding: 0 10% 15 10%;
+    display: grid;
+    grid-template-rows: auto auto auto;
+    grid-gap: 10px
+    font-family: 'Lilita2';
+}
+
+.productDetail{
+    background-color: #EEEEEE;
+    border-radius: 15px 15px 15px 15px;
+    display: grid;
+    grid-template-columns: 500px auto;
+    padding: 15px;
+    border: solid #DDD;
+}
+
+.productDetail img{
+    grid-column: span 2;
+    border-radius: 15px;
+}
+
+.full-description{
+    font-family: 'Lilita2';
+    background-color: #EEEEEE;
+    border-radius: 15px 15px 15px 15px;
+    margin-top: 15px;
+    padding: 15px;
+    border: solid #DDD;
+}
+
+.Feedback{
+    background-color: #EEEEEE;
+    grid-template-rows: 40px 230px auto;
+    font-family: 'Lilita2';
+    border-radius: 15px 15px 15px 15px;
+    margin-top: 15px;
+    min-height:700px;
+    padding: 15px;
+    border: solid #DDD;
+}
+
+.data{
+    font-family: 'Lilita2';
+    padding: 15px;
+    padding-left: 30px;
+    display: grid;
+    grid-template-rows: 100px 300px 70px;
+    grid-template-columns: 620px;
+}
+
+.Bname{
+    font-size: 64;
+    margin-left: 40;
+    margin-bottom: 10px;
+}
+
+.bot{
+    display:grid;
+    grid-template-columns: 150px 210px 260px;
+    grid-template-rows: 70px;
+}
+
+.price {
+    padding: 15;
+    font-size: 24;
+}
+
+.basket-button{
+    font-size: 24;
+    background-color: #FFB07B;
+    border-color: #FFB07B;
+    height: 70px;
+    width: 100%;
+    border-radius: 10px;
+    font-family: 'Lilita2';
+}
+
+.form-comment form{
+    display:grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: 160 70;
+    height: 230px;
+    margin: 0;
+    grid-gap: 10px
+}
+
+textarea{
+    resize: none;
+}
+
+.basket-button:hover {
+  background: #c0392b;
+  margin:0;
+}
+
+.list-of-comment{
+    display: grid;
+    grid-gap: 10px;
+    margin-top: 30px;
+}
+
+.comm {
+    background-color: #FFF;
+    border-radius: 10px;
+    display: grid;
+    grid-template-rows: 50px auto;
+    grid-template-columns: 100px auto 0;
+    padding: 15px;
+    border: solid #DDD;
+}
+
+.comm .text{
+    grid-column: span 3;
+    border-top-style: solid;
+    border-top-color: #EEE;
+    padding:10px;
+}
+
+.add-to-basket-button{
+    font-size: 24;
+    background-color: rgba(256,176,123,1);
+    border-color: #FFB07B;
+    height: 70px;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.add-to-basket-button:hover{
+    background-color: rgba(256,176,123,0.7);
+}
+
+.go-to-basket-button{
+    font-size: 24;
+    background: rgba(256,176,123,0.3);
+    border-color: #FFB07B;
+    height: 70px;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.go-to-basket-button:hover{
+    background: rgba(256,176,123,0.6);
+}
+
+.c-icon {
+    --star-active: #fece3c;
+    --star-inactive: #6c6962;
+    fill: var(--star-inactive);
+}
+
+.c-rate:hover label > .c-icon {
+    fill: var(--star-active);
+}
+
+#star1:checked ~ .c-rate :nth-child(1) .c-icon,
+#star2:checked ~ .c-rate :nth-child(-n+2) .c-icon,
+#star3:checked ~ .c-rate :nth-child(-n+3) .c-icon,
+#star4:checked ~ .c-rate :nth-child(-n+4) .c-icon,
+#star5:checked ~ .c-rate :nth-child(-n+5) .c-icon {
+    fill: var(--star-inactive);
+}

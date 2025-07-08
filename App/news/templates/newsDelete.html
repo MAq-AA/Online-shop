@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Удаление
+{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/Authstyle.css'%}" type="text/css">
+<div class="login">
+    <h1>Удалить новость?</h1>
+    <form method="post">
+        {% csrf_token %}
+        <p>Вы уверены, что хотите удалить новость: '{{ post.title }}'</p>
+        <input type="submit" value="УВЕРЕН" />
+    </form>
+</div>
+{% endblock %}
+{% block footer %}
+{% endblock %}

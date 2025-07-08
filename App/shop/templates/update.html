@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Изменить данные
+{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/Authstyle.css'%}" type="text/css">
+<div class="login">
+    <div style="padding: 50px 0 0 90px; font-size: 48;">
+        <p style="margin: 0;">Изменить данные</p>
+    </div>
+    <form method="POST" class="">
+    {% csrf_token %}
+        <p>{{ post.title }}</p>
+        <p>{{ form.description }}</p>
+        <p>{{ form.img }}</p>
+        <button class="submit" type="submit">изменить</button>
+    </form>
+    <div style="padding-left: 230px;">
+    </div>
+</div>
+{% endblock %}
+{% block footer %}
+{% endblock %}

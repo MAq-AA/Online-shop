@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load price %}
+{% block title %}
+    {{ subcategory }}
+{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/ProductListstyle.css'%}" type="text/css">
+<div class="parent">
+    <div class="navigation">
+            <form method="get" class="fltr">
+                <div style="grid-column: span 2;">
+                    <div><p style="font-size:28; margin: 10px 0 0 0;">Сортировать по:</p></div>
+                    <select style="width: 100%" name="order">
+                        <option selected>---------</option>
+                        <option value="mM">По возрастанию цены</option>
+                        <option value="Mm">По по убыванию цены</option>
+                        <option value="population">По популярности</option>
+                        <option value="stars">По рейтингу</option>
+                    </select>
+                </div>
+                <div class="price">
+                    <p style="grid-column: span 2;">Цена:</p>
+                    <div>От: {{ filter.form.price__gt }}</div>
+                    <div>До: {{ filter.form.price__lt }}</div>
+                </div>
+                <div style="grid-column: span 2;">
+                    <p style="margin: 0; font-size: 28; " >Поставщик:</p>
+                    {{ filter.form.provider }}
+                </div>
+                <div style="grid-column: span 2;"><input style="grid-column: span 2;" type="submit"/> </div>
+            </form>
+    </div>
+    <div class="list_cat" style="border: solid #DDD;">
+        {% for prod in filter.qs %}
+        <a href="{% url 'product_description' animal_sort subcategory prod.slug %}" style="text-decoration: none;">
+        <div class="product" style="border: solid #DDD;">
+            <div><img src="{{ prod.img.url }}" width="260" height="260"></div>
+            <div><p class="name">{{ prod }}</p></div>
+            <div><p class="desc">{{ prod.shortdescription }}</p></div>
+            <div style="width: 70px">
+                <p class="price">{{ prod.price | replacer | safe }}</p>
+            </div>
+            {% if user.is_authenticated %}
+            <form method="post">
+                {% csrf_token %}
+                    {% autoescape off %}
+                    {% bought prod.id %}
+                    {% endautoescape %}
+            </form>
+            {% else %}
+            <small> Войдите в аккаунт, чтобы добавлять в корзину </small>
+            {% endif %}
+        </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

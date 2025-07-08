@@ -1,0 +1,142 @@
+.basket-list{
+    font-family: 'Lilita2';
+    background-color: #EEE;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    padding: 15px;
+    border: solid #DDD;
+    display: inline-block;
+}
+
+.product{
+    display: grid;
+    grid-template-columns: 200px 500px 200px 270px 260px;
+    grid-template-rows: 50px auto;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    background-color: #FFF;
+    border: solid #DDD;
+    height: 220px;
+
+}
+
+.product div{
+    padding: 10px;
+}
+
+.img{
+    border-radius: 10px;
+}
+
+.trash-btn{
+    height: 50px;
+    width: 50px;
+    border: none;
+    background:none;
+    margin-top: 25px;
+    margin-left: 15px;
+}
+
+.form{
+    display: grid;
+    grid-template-columns: 150px auto;
+    margin-top: 45;
+}
+
+.form input[type="number"]{
+    width: 150px;
+    font-size: 36;
+    margin-top: 15;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    margin: 0;
+    transform: scale(4);
+}
+
+.buy{
+    font-size: 24;
+    background-color: #FFB07B;
+    border-color: #FFB07B;
+    height: 70px;
+    width: 200px;
+    border-radius: 10px;
+    float: right;
+    margin-right: 20px;
+}
+
+.add-to-basket-button{
+    font-size: 24;
+    background-color: rgba(256,176,123,1);
+    border-color: #FFB07B;
+    height: 70px;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.add-to-basket-button:hover{
+    background-color: rgba(256,176,123,0.7);
+}
+
+.form1{
+    padding-top: 60px;
+}
+
+.basket-list a{
+    text-decoration: none;
+}
+
+.go-to-basket-button{
+    font-size: 24;
+    background: rgba(256,176,123,0.3);
+    border-color: #FFB07B;
+    height: 70px;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.go-to-basket-button:hover{
+    background: rgba(256,176,123,0.6);
+}
+
+.fltr{
+    display: grid;
+    grid-template-columns: 300px 300px 300px 250px 300px;
+}
+
+.fltr .price{
+    font-size: 28;
+    display: grid;
+    grid-template-columns: 135px 135px;
+    grid-template-rows: 50px 100px;
+    padding: 10px;
+    grid-gap: 10px;
+    width: 100%;
+}
+
+.fltr select{
+    border-radius: 15px 15px 0 0;
+    font-size:20;
+    border: solid #FFB07B;
+    font-family: 'Lilita2';
+    -webkit-appearance: none;
+}
+
+.fltr .order{
+    display: grid;
+    grid-template-rows: 70px 50px;
+    padding: 10px;
+}
+
+.fltr .provider{
+    display: grid;
+    grid-template-rows: 70px 50px;
+    padding: 10px;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

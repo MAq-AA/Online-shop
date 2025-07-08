@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Профиль
+{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/Authstyle.css'%}" type="text/css">
+<div class="profile">
+    <div class="info">
+        <div><img src="{% static 'images/Profile.bmp' %}" width="300"></div>
+        <div style="font-size: 28;">
+            <p>Имя: {{ profile.user.username }}</p>
+            <p>Почта: {{ profile.user.email }}</p>
+            <p>Телефон: +7(XXX)XXX-XX-XX {{ profile.user.number }} </p>
+            {% if request.user.groups.all.1.name == 'Provider' %}
+                <a href="{% url 'create_product' %}" style="margin: 10px"><button class="submit">Добавить товар</button></a>
+            {% elif request.user.groups.all.1.name == 'Delivery_staff' %}
+                <a href="{% url 'order_list1' %}" style="margin: 10px"><button class="submit">Просмотр заказов</button></a>
+            {% elif user.is_superuser %}
+                <a href="{% url 'create_product' %}" style="margin: 10px"><button class="submit" >Добавить товар</button></a>
+                <a href="{% url 'order_list1' %}" style="margin: 10px"><button class="submit">Просмотр заказов</button></a>
+            {% endif %}
+        </div>
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        <div>
+            <a href="{% url 'change' profile.user.id %}"><button type="button" name="change" class="submit"> Изменить данные </button></a>
+        </div>
+        <div>
+            <a href="{% url 'delete' profile.user.id %}"><button type="button" name="delete" class="submit"> Удалить аккаунт </button></a>
+        </div>
+        <div>
+            <button name="logout" class="submit"> Выйти из аккаунта </button>
+        </div>
+    </form>
+</div>
+{% endblock content %}
+{% block footer %}
+{% endblock %}
